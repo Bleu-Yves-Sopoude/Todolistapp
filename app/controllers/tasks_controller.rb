@@ -1,18 +1,18 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [ :show, :edit, :new, :index ]
+    before_action :set_task, only: [ :show, :edit, :update, :delete ]
 
 
     def index
-        tasks = Task.all
+        @tasks = Task.all
     end
 
     def new
-        task = Task.new
+        @task = Task.new()
     end
 
     def create
-        task = Task.new(task_params)
-        if task.save
+        @task = Task.new(task_params)
+        if @task.save
             redirect_to @task, notice: "Task was successfully created"
         else
             render :new
@@ -33,18 +33,20 @@ class TasksController < ApplicationController
         end
     end
 
-    def destroy
+    def delete
         @task.destroy
         redirect_to tasks_url, notice: "task was succesfully deleted"
     end
 
     private
 
-    def set_task
-        @task= Task.find(params[:id])
-    end
+
 
     def task_params
-        params.require(:task).permit(:name, :descrition, :status)
+        params.require(:task).permit(:name, :description, :status)
+    end
+
+    def set_task
+        @task= Task.find(params[:id])
     end
 end
