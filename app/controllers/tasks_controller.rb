@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [ :show, :edit, :update, :delete ]
+    before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
 
     def index
@@ -33,7 +33,7 @@ class TasksController < ApplicationController
         end
     end
 
-    def delete
+    def destroy
         @task.destroy
         redirect_to tasks_url, notice: "task was succesfully deleted"
     end
