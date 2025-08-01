@@ -1,9 +1,16 @@
 <h1>Edit Task</h1>
 
 <%= form_with(model: @task, local: true) do |form| %>
-  <p>Name: <%= form.text_field :name %></p>
-  <p>Description: <%= form.text_area :description %></p>
-  <p>status: <%= form.check_box :name %></p>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :status %>
+  <%= form.radio_button :status, 'completed' %> completed
+  <%= form.radio_button :status, 'in-progress' %> In-Progress
+</p>
   <p><%= form.submit %></p>
 <% end %>
 
