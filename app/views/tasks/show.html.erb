@@ -1,8 +1,9 @@
-<h1><%= @task.name %></h1>
+<h1>Title: <%= @task.name %></h1>
 
-<p><%= @task.description %></p>
+<p>Description: <%= @task.description %></p>
 
-<p><%= @task.status %></p>
+
+<p>Status: <%= @task.status.humanize %></p>
 
 <%= link_to "Edit", edit_task_path(@task) %> |
 <%= link_to "Back", tasks_path %>
