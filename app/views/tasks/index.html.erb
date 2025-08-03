@@ -5,10 +5,22 @@
 <% if @tasks.empty? %>
   <p>No tasks available.</p>
 <% else %>
+  <%= form_with url: tasks_path, method: :get, local: true do %>
+    <div>
+      <%= select_tag :status, options_for_select(['pending', 'completed', 'in_progress'], params[:status]), include_blank: "All Statuses" %>
+      <%= submit_tag 'Filter' %>
+    </div>
+
+    <div>
+      <%= select_tag :sort_by, options_for_select([['Sort by Date Created', 'created_at'], ['Sort by Last Updated', 'updated_at']], params[:sort_by]), include_blank: "Select Sort Order" %>
+      <%= submit_tag 'Sort' %>
+    </div>
+  <% end %>
+
   <ul>
     <% @tasks.each do |task| %>
       <li>
-        <%= link_to task.name, task_path(task) %> |
+        <strong><%= task.name %></strong> - <%= task.status %><br>
         <%= link_to "Edit", edit_task_path(task) %> |
         <%= button_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
       </li>
