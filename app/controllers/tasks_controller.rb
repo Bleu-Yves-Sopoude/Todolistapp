@@ -5,17 +5,16 @@ class TasksController < ApplicationController
 
 
     def index
-
         if params[:status].present?
             @tasks = Task.where(status: params[:status])
         else
           @tasks = Task.all
         end
 
-        if params[:sort_by]== 'created_at'
+        if params[:sort_by]== "created_at"
             @tasks = @tasks.order(created_at: :desc)
         elsif
-            params[:sort_by]=='updated_at'
+            params[:sort_by]=="updated_at"
             @tasks = @tasks.order(updated_at: :desc)
         else
             @tasks = @tasks.order(created_at: :desc)
